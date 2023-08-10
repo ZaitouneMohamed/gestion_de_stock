@@ -91,6 +91,16 @@ class CategorieController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $categorie = Categorie::find($id);
+        if ($categorie) {
+            $categorie->delete();
+            return redirect()->back()->with([
+                "message"=>"categorie removed sucsessfly"
+            ]);
+        }else {
+            return redirect()->back()->with([
+                "message"=>"categorie not found"
+            ]);
+        }
     }
 }
