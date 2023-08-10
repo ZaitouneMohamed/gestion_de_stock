@@ -2,8 +2,10 @@
 
 namespace App\Console;
 
+use App\Console\Commands\TestEmail;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\App;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,10 +15,18 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
+
+    protected $commands = [
+        TestEmail::class,
+    ];
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        if (App()->environment("production")) {
+            $schedule->command('send:email test')->everyFiveMinutes();
+        }
     }
+
+
 
     /**
      * Register the commands for the application.
@@ -25,8 +35,8 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
-
+        $this->load(__DIR__ . '/Commands');
+        \App\Console\Commands\TestEmail::class;
         require base_path('routes/console.php');
     }
 }
