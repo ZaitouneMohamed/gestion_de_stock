@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\content;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Categorie\CreateRequest;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategorieController extends Controller
 {
@@ -36,9 +38,15 @@ class CategorieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        //
+        $categorie = Categorie::create([
+            "name" => $request->name,
+            "user_id" => Auth::user()->id
+        ]);
+        return redirect()->back()->with([
+            "message" => "categorie added successfly"
+        ]);
     }
 
     /**

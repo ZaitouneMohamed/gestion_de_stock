@@ -291,6 +291,8 @@
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
         <div class="page-wrapper">
+            @include("messages.any")
+            @include("messages.success")
             @yield('content')
         </div>
         <!-- ============================================================== -->
