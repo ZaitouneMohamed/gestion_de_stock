@@ -12,7 +12,7 @@ class TestEmail extends Command
      *
      * @var string
      */
-    protected $signature = 'send:email test';
+    protected $signature = 'send:email';
 
     /**
      * The console command description.
@@ -32,14 +32,13 @@ class TestEmail extends Command
         // Mail::to('recipient@example.com')->send(new \App\Mail\ExampleEmail());
         $recipient = 'dwm23-zaitoune@ifiag.com';
         $subject = 'Demo Email';
-        $content = 'Hello there! This is a demo email sent from Laravel.';
+        $content = 'Hello there! This is a demo email sent from command.';
 
         Mail::raw($content, function ($message) use ($recipient, $subject) {
             $message->to($recipient);
             $message->subject($subject);
         });
 
-        $this->info('Email sent successfully!');
         $this->info('Email sent successfully.');
     }
 }

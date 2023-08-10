@@ -21,9 +21,9 @@ class Kernel extends ConsoleKernel
     ];
     protected function schedule(Schedule $schedule)
     {
-        if (App()->environment("production")) {
-            $schedule->command('send:email test')->everyMinute();
-        }
+        // if (App()->environment("production")) {
+            $schedule->command('send:email')->everyMinute();
+        // }
     }
 
 
@@ -36,7 +36,7 @@ class Kernel extends ConsoleKernel
     protected function commands()
     {
         $this->load(__DIR__ . '/Commands');
-        \App\Console\Commands\TestEmail::class;
+        // \App\Console\Commands\TestEmail::class;
         require base_path('routes/console.php');
     }
 }
