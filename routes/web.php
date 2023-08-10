@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,5 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::permanentRedirect('/', '/admin');
 
-Route::view('/', 'admin.index');
+
+Route::prefix("admin")->middleware("auth")->group(function(){
+    Route::view('/', 'admin.index');
+});
+// 0710750199
+
+Route::view('/login', 'auth.login')->name("login");
+
+Route::controller(AuthController::class)->name("auth.")->group(function(){
+    Route::post("login","login")->name("login");
+    Route::get("logout","logout")->name("logout");
+});
