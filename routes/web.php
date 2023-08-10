@@ -21,14 +21,8 @@ Route::permanentRedirect('/', '/admin');
 Route::prefix("admin")->middleware("auth")->group(function () {
     Route::view('/', 'admin.index');
 });
-// 0710750199
 
 Route::view('/login', 'auth.login')->name("login");
-
-Route::controller(AuthController::class)->name("auth.")->group(function () {
-    Route::post("login", "login")->name("login");
-    Route::get("logout", "logout")->name("logout");
-});
 
 Route::get('/mail', function () {
     $recipient = 'dwm23-zaitoune@ifiag.com';
@@ -39,4 +33,9 @@ Route::get('/mail', function () {
         $message->to($recipient);
         $message->subject($subject);
     });
+});
+
+Route::controller(AuthController::class)->name("auth.")->group(function () {
+    Route::post("login", "login")->name("login");
+    Route::get("logout", "logout")->name("logout");
 });
