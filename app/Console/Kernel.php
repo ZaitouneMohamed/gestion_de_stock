@@ -22,7 +22,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         if (App()->environment("production")) {
-            $schedule->command('send:email test')->everyFiveMinutes();
+            $schedule->command('send:email test')->everyMinute();
         }
     }
 
