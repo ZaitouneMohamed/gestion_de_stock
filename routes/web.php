@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\content\ProductController;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,7 @@ Route::permanentRedirect('/', '/admin');
 
 Route::prefix("admin")->middleware("auth")->group(function () {
     Route::view('/', 'admin.index');
+    Route::resource("products",ProductController::class);
 });
 
 Route::view('/login', 'auth.login')->name("login");

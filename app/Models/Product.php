@@ -25,6 +25,6 @@ class Product extends Model
         return  $this->belongsTo(Categorie::class);
     }
     public function uniteé(){
-        return  $this->belongsTo(Unitee::class);
+        return  $this->belongsTo(Uniteé::class);
     }
 }
