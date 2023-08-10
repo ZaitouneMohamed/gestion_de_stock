@@ -12,7 +12,7 @@ class Categorie extends Model
         'name',
         'user_id',
     ];
-    public function Product()
+    public function Products()
     {
         return  $this->hasMany(Product::class);
     }

@@ -41,7 +41,7 @@
                                             <tr>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->user->name }}</td>
-                                                <td>{{ $item->Product->count() }}</td>
+                                                <td>{{ $item->Products->count() }}</td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <button type="button"  class="btn btn-info dropdown-toggle" style="border-radius: 15px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">action</button>

@@ -15,7 +15,8 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        $categories = Categorie::latest()->paginate(5);
+        // $categories = Categorie::latest()->paginate(5);
+        $categories = Categorie::with(["Products","user"])->latest()->paginate(5);
         return view('admin.categories.index',compact('categories'));
     }
 

@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::latest()->paginate(5);
+        $products = Product::with(["user","categorie","uniteé"])->latest()->paginate(7);
         return view('admin.products.index',compact("products"));
     }
 
