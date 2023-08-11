@@ -53,7 +53,7 @@
                                                             <form action="{{route('categories.destroy',$item->id)}}" method="post">
                                                                 @csrf
                                                                 @method("delete")
-                                                                <button type="submit" class="dropdown-item">delete</button>
+                                                                <button type="submit" onclick="return confirm('Are you sure?')" class="dropdown-item">delete</button>
                                                             </form>
                                                             <a class="dropdown-item" href="#">Something else here</a>
                                                             <div class="dropdown-divider"></div>
