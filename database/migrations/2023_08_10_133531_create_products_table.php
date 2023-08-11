@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->integer("stock");
-            $table->text("description");
+            $table->text("description")->nullable();
             $table->foreignId('categorie_id')->unsigned();
             $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreignId('uniteé_id')->unsigned();

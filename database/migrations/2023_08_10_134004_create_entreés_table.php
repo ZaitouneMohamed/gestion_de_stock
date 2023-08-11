@@ -21,6 +21,8 @@ return new class extends Migration
             $table->double("prix_achat");
             $table->integer("stock_avant");
             $table->integer("qte");
+            $table->foreignId('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text("observation");
             $table->timestamps();
         });
