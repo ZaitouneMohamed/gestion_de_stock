@@ -18,8 +18,8 @@ class CategorieController extends Controller
     public function index()
     {
         // $categories = Categorie::latest()->paginate(5);
-        $categories = Categorie::with(["Products","user"])->latest()->paginate(5);
-        return view('admin.categories.index',compact('categories'));
+        $categories = Categorie::with(["Products", "user"])->latest()->paginate(5);
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -95,11 +95,11 @@ class CategorieController extends Controller
         if ($categorie) {
             $categorie->delete();
             return redirect()->back()->with([
-                "message"=>"categorie removed sucsessfly"
+                "message" => "categorie removed sucsessfly"
             ]);
-        }else {
+        } else {
             return redirect()->back()->with([
-                "message"=>"categorie not found"
+                "message" => "categorie not found"
             ]);
         }
     }
