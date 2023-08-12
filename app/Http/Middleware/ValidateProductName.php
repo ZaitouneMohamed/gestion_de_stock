@@ -19,14 +19,13 @@ class ValidateProductName
     {
         $name = $request->name;
         $categorie = $request->categorie;
-        $product = Product::where('name',$name)->where('categorie_id',$categorie)->get();
+        $product = Product::where('name', $name)->where('categorie_id', $categorie)->get();
         if ($product->count() != 0) {
-            return redirect("/")->with([
-                "error" => "this product is already exist please try to change the categorie or name"
+            return redirect()->back()->with([
+                "message" => "this product is already exist please try to change the categorie or name"
             ]);
         } else {
             return $next($request);
         }
-
     }
 }
