@@ -18,13 +18,20 @@ class Product extends Model
         'prix',
         'stock_mini',
     ];
-    public function user(){
+    public function user()
+    {
         return  $this->belongsTo(User::class);
     }
-    public function categorie(){
+    public function categorie()
+    {
         return  $this->belongsTo(Categorie::class);
     }
-    public function uniteé(){
+    public function uniteé()
+    {
         return  $this->belongsTo(Uniteé::class);
+    }
+    public function History()
+    {
+        return $this->morphMany(History::class, "historyable");
     }
 }

@@ -24,4 +24,8 @@ class Sortieé extends Model
     {
         return   $this->belongsTo(Product::class);
     }
+    public function History()
+    {
+        return $this->morphMany(History::class, "historyable");
+    }
 }

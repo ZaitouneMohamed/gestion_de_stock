@@ -9,12 +9,12 @@ class History extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'date',
-        'user_id',
         'description',
+        'historyable_id',
+        'historyable_type',
     ];
-
-    public function user(){
-        return $this->belongsTo(User::class);
+    public function historyable()
+    {
+        return $this->morphTo();
     }
 }

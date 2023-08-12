@@ -11,4 +11,8 @@ class Uniteé extends Model
     protected $fillable = [
         'name',
     ];
+    public function History()
+    {
+        return $this->morphMany(History::class, "historyable");
+    }
 }

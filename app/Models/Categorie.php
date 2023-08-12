@@ -20,4 +20,8 @@ class Categorie extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function History()
+    {
+        return $this->morphMany(History::class, "historyable");
+    }
 }

@@ -12,4 +12,8 @@ class Parameters extends Model
         'name',
         'footer',
     ];
+    public function History()
+    {
+        return $this->morphMany(History::class, "historyable");
+    }
 }

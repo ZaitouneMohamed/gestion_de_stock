@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->id();
-            $table->date("date");
-            $table->foreignId('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text("description");
+            $table->unsignedBigInteger('historyable_id');
+            $table->string('historyable_type');
             $table->timestamps();
         });
     }
