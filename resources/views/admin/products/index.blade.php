@@ -46,7 +46,7 @@
                                             <tr>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->stock }}</td>
-                                                <td>{{ Str::limit($item->description, 10, '...')  }}</td>
+                                                <td>{{ Str::limit($item->description, 10, '...') }}</td>
                                                 <td>{{ $item->categorie->name }}</td>
                                                 <td>{{ $item->uniteé->name }}</td>
                                                 <td>{{ $item->user->name }}</td>
@@ -54,8 +54,11 @@
                                                 <td>{{ $item->stock_mini }}</td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <button type="button"  class="btn btn-info dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Info</button>
-                                                        <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
+                                                        <button type="button" class="btn btn-info dropdown-toggle "
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">Info</button>
+                                                        <div class="dropdown-menu" x-placement="bottom-start"
+                                                            style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
                                                             <a class="dropdown-item" href="#">Action</a>
                                                             <a class="dropdown-item" href="#">Another action</a>
                                                             <a class="dropdown-item" href="#">Something else here</a>
@@ -82,18 +85,68 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Alert Model</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Create New Product</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        Lorem ipsum dolor sit amet...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+                    <form action="{{ route('products.store') }}" method="post">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="exampleFormControlInput1" class="form-label">product name</label>
+                                    <input type="text" class="form-control" name="name" placeholder="product name"
+                                        id="">
+                                </div>
+                                <div class="col-6">
+                                    <label for="exampleFormControlInput1" class="form-label">Stock</label>
+                                    <input type="number" class="form-control" name="stock" placeholder="stock here"
+                                        id="">
+                                </div>
+                                <div class="col-6">
+                                    <label for="exampleFormControlInput1" class="form-label">Stock mini</label>
+                                    <input type="number" class="form-control" name="stock_mini" placeholder="stock mini"
+                                        id="">
+                                </div>
+                                <div class="col-6">
+                                    <label for="exampleFormControlInput1" class="form-label">Prix</label>
+                                    <input type="number" class="form-control" name="prix" placeholder="prix"
+                                        id="">
+                                </div><br>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Categorie</label>
+                                        <select class="form-select" name="categorie" id="">
+                                            <option selected>Shoose</option>
+                                            @foreach (\App\Models\Categorie::all() as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Uniteé</label>
+                                        <select class="form-select" name="unitee" id="">
+                                            <option selected>Shoose</option>
+                                            @foreach (\App\Models\Uniteé::all() as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div><br>
+                                <div class="col-12">
+                                    <label for="exampleFormControlInput1" class="form-label">Description</label>
+                                    <textarea placeholder="description" class="form-control" name="description" id="" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
