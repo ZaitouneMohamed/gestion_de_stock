@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\content\CategorieController;
 use App\Http\Controllers\content\ProductController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,9 @@ Route::prefix("admin")->middleware("auth")->group(function () {
     Route::view('/', 'admin.index');
     Route::resource("products", ProductController::class);
     Route::resource("categories", CategorieController::class);
+    Route::controller(HomeController::class)->group(function(){
+        Route::get('history',"HistoryList")->name("history");
+    });
 });
 
 Route::view('/login', 'auth.login')->name("login");
