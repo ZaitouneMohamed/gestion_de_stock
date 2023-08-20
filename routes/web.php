@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\content\CategorieController;
+use App\Http\Controllers\content\EntreeController;
 use App\Http\Controllers\content\ProductController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Mail;
@@ -23,14 +24,17 @@ Route::permanentRedirect('/', '/admin');
 
 Route::prefix("admin")->middleware("auth")->group(function () {
     Route::view('/', 'admin.index');
-    Route::resource("products", ProductController::class);
     Route::resource("categories", CategorieController::class);
-    Route::controller(HomeController::class)->group(function(){
-        Route::get('history',"HistoryList")->name("history");
+    Route::resource("products", ProductController::class);
+    Route::resource("entree", EntreeController::class)->except("create");
+    Route::controller(HomeController::class)->group(function () {
+        Route::get('history', "HistoryList")->name("history");
     });
 });
 
-Route::view('/login', 'auth.login')->name("login");
+Route::view('/login', 'auth.login')->name("login")->middleware("guest");
+
+Route::get("products_of_categorie/", [HomeController::class, 'GetProductOfCategorie'])->name("productsOfCategorie");
 
 Route::get('/mail', function () {
     $recipient = 'dwm23-zaitoune@ifiag.com';
