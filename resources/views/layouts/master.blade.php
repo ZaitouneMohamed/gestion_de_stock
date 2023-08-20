@@ -271,7 +271,7 @@
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
                                     class="hide-menu">Stock</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="form-basic.html" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="{{route('entree.index')}}" class="sidebar-link"><i
                                             class="mdi mdi-note-outline"></i><span class="hide-menu">Entreé
                                         </span></a></li>
                                 <li class="sidebar-item"><a href="form-wizard.html" class="sidebar-link"><i
