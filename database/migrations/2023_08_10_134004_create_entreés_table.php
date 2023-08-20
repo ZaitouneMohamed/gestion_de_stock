@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('entreés', function (Blueprint $table) {
             $table->id();
-            $table->date("date");
             $table->foreignId('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->double("prix_achat");
@@ -23,7 +22,7 @@ return new class extends Migration
             $table->integer("qte");
             $table->foreignId('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->text("observation");
+            $table->text("observation")->nullable();
             $table->timestamps();
         });
     }

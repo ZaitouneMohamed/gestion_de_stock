@@ -9,7 +9,6 @@ class Entreé extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'date',
         'product_id',
         'prix_achat',
         'stock_avant',
@@ -23,7 +22,7 @@ class Entreé extends Model
     }
     public function product()
     {
-        return   $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class);
     }
     public function History()
     {
