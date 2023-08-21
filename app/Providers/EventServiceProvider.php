@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Events\CreateEntree;
+use App\Listeners\CreateEntreeListener;
 use App\Listeners\UpdateQteAndHistory;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -21,8 +22,8 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         CreateEntree::class => [
-            UpdateQteAndHistory::class,
-        ]
+            CreateEntreeListener::class,
+        ],
     ];
 
     /**
