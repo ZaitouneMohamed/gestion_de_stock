@@ -4,6 +4,7 @@ namespace App\Http\Controllers\content;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\CreateProductRequest;
+use App\Models\History;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,6 +54,11 @@ class ProductController extends Controller
             "description" => $request->description,
             "stock_mini" => $request->stock_mini
         ]);
+
+        $description = Auth::user()->name . " add new product : " . $product->name . "with stock : " . $product->stock;
+        $new_product = new History(["description" => $description]);
+        $product->History()->save($new_product);
+
         return redirect()->back()->with([
             "success" => "product added successfly"
         ]);
