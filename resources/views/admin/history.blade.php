@@ -28,36 +28,13 @@
                                         <tr class="text-center font-weight-bold">
                                             <th>#</th>
                                             <th>description</th>
-                                            <th>action</th>
-                                            <th>by</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($history as $item)
                                             <tr>
-                                                <td>{{ $item->id }}</td>
-                                                <td>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info dropdown-toggle "
-                                                            data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">Info</button>
-                                                        <div class="dropdown-menu" x-placement="bottom-start"
-                                                            style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
-                                                            <a class="dropdown-item" href="#">Action</a>
-                                                            <form action="{{ route('products.destroy', $item->id) }}"
-                                                                method="post">
-                                                                @csrf
-                                                                @method('delete')
-                                                                <button type="submit"
-                                                                    onclick="return confirm('Are you sure?')"
-                                                                    class="dropdown-item">delete</button>
-                                                            </form>
-                                                            <a class="dropdown-item" href="#">Something else here</a>
-                                                            <div class="dropdown-divider"></div>
-                                                            <a class="dropdown-item" href="#">Separated link</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
+                                                <td>{{ $loop->index + 1 }}</td>
+                                                <td>{{ $item->description }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
