@@ -11,6 +11,7 @@ class Categorie extends Model
     protected $fillable = [
         'name',
         'user_id',
+        'statue'
     ];
     public function Products()
     {
@@ -23,5 +24,13 @@ class Categorie extends Model
     public function History()
     {
         return $this->morphMany(History::class, "historyable");
+    }
+    public function scopeActive($query)
+    {
+        return $query->where('statue', 1);
+    }
+    public function scopeInActive($query)
+    {
+        return $query->where('statue', 0);
     }
 }

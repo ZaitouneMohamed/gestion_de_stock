@@ -15,8 +15,9 @@ class Product extends Model
         'categorie_id',
         'uniteé_id',
         'user_id',
+        'statue',
         'prix',
-        'stock_mini',
+        'stock_mini'
     ];
     public function user()
     {
@@ -33,5 +34,13 @@ class Product extends Model
     public function History()
     {
         return $this->morphMany(History::class, "historyable");
+    }
+    public function scopeActive($query)
+    {
+        return $query->where('statue', 1);
+    }
+    public function scopeInActive($query)
+    {
+        return $query->where('statue', 0);
     }
 }
