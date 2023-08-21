@@ -30,6 +30,7 @@
                                 <table id="zero_config" class="table table-striped table-bordered">
                                     <thead>
                                         <tr class="text-center font-weight-bold">
+                                            <th>#</th>
                                             <th>Name</th>
                                             <th>Stock</th>
                                             <th>description</th>
@@ -44,6 +45,7 @@
                                     <tbody>
                                         @foreach ($products as $item)
                                             <tr>
+                                                <td>{{ $loop->index + 1 }}</td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->stock }}</td>
                                                 <td>{{ Str::limit($item->description, 10, '...') }}</td>
