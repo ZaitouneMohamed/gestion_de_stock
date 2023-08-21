@@ -5,6 +5,7 @@ namespace App\Http\Controllers\content;
 use App\Events\CreateEntree;
 use App\Http\Controllers\Controller;
 use App\Models\Entreé;
+use App\Models\History;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,6 +51,11 @@ class EntreeController extends Controller
             "user_id" => Auth::user()->id
         ]);
         event(new CreateEntree($entree));
+
+        $description = "new entree by : " . Auth::user()->name . " - entree " . $request->qte . " of " . $product->name;
+        $new_entree = new History(["description"=> $description]);
+        $entree->History()->save($new_entree);
+
         return redirect()->route('entree.index')->with([
             "success" => "entree added successfly"
         ]);
