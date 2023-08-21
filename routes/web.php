@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\content\CategorieController;
 use App\Http\Controllers\content\EntreeController;
 use App\Http\Controllers\content\ProductController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -27,8 +28,9 @@ Route::prefix("admin")->middleware("auth")->group(function () {
     Route::resource("categories", CategorieController::class);
     Route::resource("products", ProductController::class);
     Route::resource("entree", EntreeController::class)->except("create");
+    Route::get("history", HistoryController::class)->name("history");
     Route::controller(HomeController::class)->group(function () {
-        Route::get('history', "HistoryList")->name("history");
+        // Route::get('history', "HistoryList")->name("history");
     });
 });
 
