@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("name");
             $table->foreignId('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer("statue")->default(1);
             $table->timestamps();
         });
     }

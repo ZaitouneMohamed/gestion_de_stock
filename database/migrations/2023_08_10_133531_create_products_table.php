@@ -25,6 +25,7 @@ return new class extends Migration
             $table->foreignId('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->double("prix");
+            $table->integer('statue')->default(1);
             $table->integer("stock_mini");
             $table->timestamps();
         });
