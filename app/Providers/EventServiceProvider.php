@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\CreateEntree;
+use App\Events\CreateSortieEvent;
 use App\Listeners\CreateEntreeListener;
+use App\Listeners\CreateSortieListener;
 use App\Listeners\UpdateQteAndHistory;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -23,6 +25,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         CreateEntree::class => [
             CreateEntreeListener::class,
+        ],
+        CreateSortieEvent::class => [
+            CreateSortieListener::class,
         ],
     ];
 

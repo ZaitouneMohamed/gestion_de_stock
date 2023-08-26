@@ -3,8 +3,10 @@
 namespace App\Listeners;
 
 use App\Events\CreateEntree;
+use App\Models\History;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Auth;
 
 class CreateEntreeListener
 {
@@ -32,5 +34,8 @@ class CreateEntreeListener
         $product->update([
             "stock" => $new_qte
         ]);
+        $description = "new sortie by : " . Auth::user()->name . " - sortie " . $entree->qte . " of " . $product->name;
+        $new_history = new History(["description" => $description]);
+        $product->History()->save($new_history);
     }
 }
