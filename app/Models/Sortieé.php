@@ -9,9 +9,9 @@ class Sortieé extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'date',
         'product_id',
         'prix_ventes',
+        'stock_avant',
         'qte',
         'user_id',
         'observation',
@@ -23,9 +23,5 @@ class Sortieé extends Model
     public function product()
     {
         return   $this->belongsTo(Product::class);
-    }
-    public function History()
-    {
-        return $this->morphMany(History::class, "historyable");
     }
 }
