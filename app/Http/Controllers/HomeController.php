@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\CreateEntree;
+use App\Events\CreateSortieEvent;
 use App\Models\Entreé;
 use App\Models\History;
 use App\Models\Product;
@@ -24,6 +25,15 @@ class HomeController extends Controller
         $products = Product::where('categorie_id', $id)->get();
         return response()->json($products);
     }
+
+    function GetProductInfo(Request $request)
+    {
+        $id = $request->product_id;
+        $product = Product::find($id);
+        return response()->json($product);
+    }
+
+
 
     public function EntreeList()
     {
@@ -49,10 +59,6 @@ class HomeController extends Controller
         ]);
         event(new CreateEntree($entree));
 
-        $description = "new entree by : " . Auth::user()->name . " - entree " . $request->qte . " of " . $product->name;
-        $new_entree = new History(["description"=> $description]);
-        $entree->History()->save($new_entree);
-
         return redirect()->route('entree.index')->with([
             "success" => "entree added successfly"
         ]);
@@ -60,21 +66,16 @@ class HomeController extends Controller
     public function AddSortie(Request $request)
     {
         $product = Product::find($request->product_id);
-        $entree = Entreé::create([
+        $sortie = Sortieé::create([
             "product_id" => $request->product_id,
-            "prix_achat" => $request->prix_achat,
             "qte" => $request->qte,
             "stock_avant" => $product->stock,
             "observation" => $request->description,
-            "user_id" => Auth::user()->id
+            "user_id" => Auth::user()->id,
+            'prix_ventes' => $request->prix_ventes,
         ]);
-        event(new CreateEntree($entree));
-
-        $description = "new entree by : " . Auth::user()->name . " - entree " . $request->qte . " of " . $product->name;
-        $new_entree = new History(["description"=> $description]);
-        $entree->History()->save($new_entree);
-
-        return redirect()->route('entree.index')->with([
+        event(new CreateSortieEvent($sortie));
+        return redirect()->route('SortieList')->with([
             "success" => "entree added successfly"
         ]);
     }
