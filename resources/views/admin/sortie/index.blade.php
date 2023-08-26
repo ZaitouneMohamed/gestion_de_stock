@@ -4,7 +4,7 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title">Entreé</h4>
+                <h4 class="page-title">Sortie</h4>
                 <div class="ml-auto text-right">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -94,7 +94,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('AddEntree') }}" method="post">
+                    <form action="{{ route('AddSortie') }}" method="post">
                         @csrf
                         <div class="modal-body">
                             <div class="row">

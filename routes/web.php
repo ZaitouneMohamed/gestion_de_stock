@@ -27,10 +27,13 @@ Route::prefix("admin")->middleware("auth")->group(function () {
     Route::view('/', 'admin.index');
     Route::resource("categories", CategorieController::class);
     Route::resource("products", ProductController::class);
-    Route::resource("entree", EntreeController::class)->except("create");
+    // Route::resource("entree", EntreeController::class)->except("create");
     Route::get("history", HistoryController::class)->name("history");
     Route::controller(HomeController::class)->group(function () {
-        // Route::get('history', "HistoryList")->name("history");
+        Route::get('EntreeList', "EntreeList")->name("EntreeList");
+        Route::post('addEntree', "AddEntree")->name("AddEntree");
+        Route::get('SortieList', "SortieList")->name("SortieList");
+        Route::post('AddSortie', "AddSortie")->name("AddSortie");
     });
 });
 
