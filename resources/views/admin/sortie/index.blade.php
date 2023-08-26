@@ -24,7 +24,7 @@
                         <div class="card-body">
                             <button type="button" class="btn btn-primary margin-5 text-white" data-toggle="modal"
                                 data-target="#Modal2">
-                                Add New Entree
+                                Add New Sortie
                             </button><br>
                             <div class="table-responsive">
                                 <table id="zero_config" class="table table-striped table-bordered">
@@ -44,7 +44,7 @@
                                             <tr>
                                                 <td>{{$item->id}}</td>
                                                 <td>{{ $item->product->name }}</td>
-                                                <td>{{ $item->prix_achat }}</td>
+                                                <td>{{ $item->prix_ventes }}</td>
                                                 <td>{{ $item->stock_avant }}</td>
                                                 <td>{{ $item->qte }}</td>
                                                 <td>{{ $item->user->name }}</td>
@@ -117,14 +117,14 @@
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <label for="exampleFormControlInput1" class="form-label">prix d'achat</label>
-                                    <input type="text" class="form-control" name="prix_achat" placeholder="prix"
+                                    <label for="exampleFormControlInput1" class="form-label">prix de vente</label>
+                                    <input type="text" class="form-control" name="prix_ventes" placeholder="prix"
                                         id="">
                                 </div>
                                 <div class="col-6">
-                                    <label for="exampleFormControlInput1" class="form-label">Qte</label>
-                                    <input type="number" class="form-control" name="qte" placeholder="qte here"
-                                        id="">
+                                    <label for="exampleFormControlInput1" class="form-label">Qte</label><span id="maxQuantitySpan" style="color: red" ></span>
+                                    <input type="number" max="0" class="form-control" name="qte" placeholder="qte here"
+                                        id="qty">
                                 </div>
                                 <div class="col-12">
                                     <label for="exampleFormControlInput1" class="form-label">Description</label>
@@ -147,7 +147,7 @@
     <script>
         document.getElementById('categorie').addEventListener('change', function() {
             var selectedCategorie = this.value;
-            products = "";
+            products = "<option ></option>";
             $.ajax({
                 url: '{{ route('productsOfCategorie') }}',
                 type: 'GET',
@@ -162,6 +162,29 @@
                             '</option>';
                     });
                     document.getElementById('products').innerHTML = products;
+                    $('#qty').attr('max', 0);
+                    document.getElementById('maxQuantitySpan').textContent = '';
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+        document.getElementById('products').addEventListener('change', function() {
+            var selectedCategorie = this.value;
+            products = "";
+            $.ajax({
+                url: '{{ route('GetProductInfo') }}',
+                type: 'GET',
+                data: {
+                    product_id: selectedCategorie
+                },
+                dataType: 'json',
+                success: function(response) {
+                    maxQuantity = response.stock
+                    console.log(maxQuantity)
+                    $('#qty').attr('max', maxQuantity);
+                    document.getElementById('maxQuantitySpan').textContent = 'Max Quantity: ' + maxQuantity;
                 },
                 error: function(error) {
                     console.log(error);

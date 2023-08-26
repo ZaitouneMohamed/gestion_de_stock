@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('sortieés', function (Blueprint $table) {
             $table->id();
-            $table->date("date");
             $table->foreignId('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->double("prix_ventes");
             $table->integer("qte");
+            $table->integer("stock_avant");
             $table->text("observation");
             $table->foreignId('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

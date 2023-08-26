@@ -40,6 +40,7 @@ Route::prefix("admin")->middleware("auth")->group(function () {
 Route::view('/login', 'auth.login')->name("login")->middleware("guest");
 
 Route::get("products_of_categorie/", [HomeController::class, 'GetProductOfCategorie'])->name("productsOfCategorie");
+Route::get("GetProductInfo/", [HomeController::class, 'GetProductInfo'])->name("GetProductInfo");
 
 Route::get('/mail', function () {
     $recipient = 'dwm23-zaitoune@ifiag.com';
